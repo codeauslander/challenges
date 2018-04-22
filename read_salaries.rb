@@ -1,14 +1,12 @@
-require 'money'
 def conver_csv_to_array(file)
   document = []
     while !file.eof? 
       line = file.readline.strip.split(',')
       document << line
     end 
-  # p document
   return document
 end 
-  
+
 class Employee
   attr_accessor :last_name, :first_name, :salary
   def initialize(params)
@@ -18,9 +16,7 @@ class Employee
   end
 end
 
-
-
-class Employees
+class Organization
 
   def initialize()
     @employees = []
@@ -30,10 +26,7 @@ class Employees
     @employees << employee
   end
 
-
-
   def print_salaries()
-
 
     max_last_name = @employees.max_by{|e| e.last_name.length}
     max_first_name = @employees.max_by{|e| e.first_name.length}
@@ -63,7 +56,7 @@ end
 def create_employees()
   file = File.new("salaries.csv")
   salaries = conver_csv_to_array(file)
-  employees = Employees.new
+  employees = Organization.new
   salaries.each do |salary|
 
     last = salary[0]
@@ -73,6 +66,7 @@ def create_employees()
   end
   employees.print_salaries
 end
+
 
 create_employees
 
